@@ -1,10 +1,32 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("io.spring.gradle:dependency-management-plugin:1.0.11.RELEASE")
+    }
+}
+
+repositories.addAll(rootProject.buildscript.repositories)
+
 plugins {
     java
     `java-library`
 }
 
+apply<io.spring.gradle.dependencymanagement.DependencyManagementPlugin>()
+
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
+}
+
+configure<io.spring.gradle.dependencymanagement.internal.dsl.StandardDependencyManagementExtension> {
+    dependencies {
+        dependency("org.projectlombok:lombok:1.18.+")
+        dependency("org.slf4j:slf4j-api:1.7.+")
+        dependency("org.springframework.boot:spring-boot:2.+")
+        dependency("org.springframework.boot:spring-boot-configuration-processor:2.+")
+    }
 }
 
 dependencies {
@@ -18,6 +40,5 @@ dependencies {
 
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     compileOnly("org.springframework.boot:spring-boot-configuration-processor")
-
 
 }
