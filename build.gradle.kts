@@ -14,13 +14,10 @@ plugins {
     `java-library`
 }
 
-apply<io.spring.gradle.dependencymanagement.DependencyManagementPlugin>()
+val asSubproject = pluginManager.hasPlugin("io.spring.dependency-management")
+if (!asSubproject) apply<io.spring.gradle.dependencymanagement.DependencyManagementPlugin>()
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-}
-
-configure<io.spring.gradle.dependencymanagement.internal.dsl.StandardDependencyManagementExtension> {
+if (!asSubproject) configure<io.spring.gradle.dependencymanagement.internal.dsl.StandardDependencyManagementExtension> {
     dependencies {
         dependency("org.projectlombok:lombok:1.18.+")
         dependency("org.slf4j:slf4j-api:1.7.+")
@@ -41,4 +38,8 @@ dependencies {
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     compileOnly("org.springframework.boot:spring-boot-configuration-processor")
 
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
 }
