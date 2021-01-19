@@ -4,7 +4,6 @@ import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @Data
-@ConfigurationProperties("client.ssl")
 public class ClientSslProperties {
 
     private String keyStore;

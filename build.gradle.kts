@@ -23,6 +23,9 @@ if (!asSubproject) configure<io.spring.gradle.dependencymanagement.internal.dsl.
         dependency("org.slf4j:slf4j-api:1.7.+")
         dependency("org.springframework.boot:spring-boot:2.+")
         dependency("org.springframework.boot:spring-boot-configuration-processor:2.+")
+        dependency("org.springframework.boot:spring-boot-autoconfigure:2.+")
+        dependency("io.netty:netty-all:4.+")
+        dependency("com.playtika.reactivefeign:feign-reactor-webclient:2.+")
     }
 }
 
@@ -34,6 +37,9 @@ dependencies {
 
     api("org.slf4j:slf4j-api")
     api("org.springframework.boot:spring-boot")
+    api("org.springframework.boot:spring-boot-autoconfigure")
+    compileOnly("io.netty:netty-all")
+    compileOnly("com.playtika.reactivefeign:feign-reactor-webclient")
 
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     compileOnly("org.springframework.boot:spring-boot-configuration-processor")

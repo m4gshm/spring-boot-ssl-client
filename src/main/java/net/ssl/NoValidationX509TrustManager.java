@@ -1,8 +1,9 @@
-package javax.net.ssl;
+package net.ssl;
 
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
+import javax.net.ssl.X509TrustManager;
 import java.security.cert.X509Certificate;
 
 @Slf4j

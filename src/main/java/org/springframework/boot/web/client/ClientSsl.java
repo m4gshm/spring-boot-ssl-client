@@ -4,12 +4,14 @@ import lombok.Getter;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
+import net.ssl.NoValidationTrustManagerFactory;
 
 import javax.net.ssl.KeyManagerFactory;
-import javax.net.ssl.NoValidationTrustManagerFactory;
 import javax.net.ssl.TrustManagerFactory;
-import java.io.FileInputStream;
+import java.io.InputStream;
 import java.security.KeyStore;
+
+import static org.springframework.util.ResourceUtils.getURL;
 
 @Slf4j
 public class ClientSsl {
@@ -33,10 +35,11 @@ public class ClientSsl {
         if (type == null) type = "jks";
         val trustStore = provider != null ? KeyStore.getInstance(type, provider) : KeyStore.getInstance(type);
 
-        if (path != null) try (val fis = new FileInputStream(path)) {
+        if (path != null) try (val fis = getInputStream(path)) {
             log.trace("load truststore {}", path);
             trustStore.load(fis, password != null ? password.toCharArray() : null);
         }
+        else trustStore.load(null);
         val trustManagerFactory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
         trustManagerFactory.init(trustStore);
         return trustManagerFactory;
@@ -47,15 +50,23 @@ public class ClientSsl {
         if (type == null) type = "pkcs12";
 
         val keyStore = provider != null ? KeyStore.getInstance(type, provider) : KeyStore.getInstance(type);
-
         val passwordChars = password != null ? password.toCharArray() : null;
-        if (path != null) try (val fis = new FileInputStream(path)) {
+
+
+        if (path != null) try (val fis = getInputStream(path)) {
             log.trace("load keystore {}", path);
             keyStore.load(fis, passwordChars);
         }
+        else keyStore.load(null);
         val keyManagerFactory = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
         keyManagerFactory.init(keyStore, passwordChars);
         return keyManagerFactory;
     }
+
+    @SneakyThrows
+    private static InputStream getInputStream(String path) {
+        return getURL(path).openStream();
+    }
+
 
 }

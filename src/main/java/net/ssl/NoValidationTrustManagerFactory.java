@@ -1,5 +1,6 @@
-package javax.net.ssl;
+package net.ssl;
 
+import javax.net.ssl.*;
 import java.security.KeyStore;
 
 public class NoValidationTrustManagerFactory extends TrustManagerFactory {
