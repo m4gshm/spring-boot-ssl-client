@@ -1,12 +1,12 @@
-package org.springframework.boot.web.client.config;
+package org.springframework.boot.autoconfigure;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.web.client.ClientSsl;
-import org.springframework.boot.web.client.NettySslContextBuilderFactory;
-import org.springframework.boot.web.client.RestTemplateFactory;
-import org.springframework.boot.web.client.SslContextHolder;
+import io.net.ssl.client.ClientSsl;
+import io.netty.handler.ssl.NettySslContextBuilderFactory;
+import org.springframework.web.client.RestTemplateFactory;
+import io.net.ssl.SslContextHolder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

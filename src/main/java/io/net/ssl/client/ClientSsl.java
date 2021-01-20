@@ -1,11 +1,11 @@
-package org.springframework.boot.web.client;
+package io.net.ssl.client;
 
 import lombok.Getter;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
-import net.ssl.AcceptAnyHostname;
-import net.ssl.NoValidationTrustManagerFactory;
+import io.net.ssl.AcceptAnyHostname;
+import io.net.ssl.NoValidationTrustManagerFactory;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.KeyManagerFactory;

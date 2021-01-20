@@ -1,4 +1,4 @@
-package org.springframework.boot.web.client;
+package io.net.ssl.client;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

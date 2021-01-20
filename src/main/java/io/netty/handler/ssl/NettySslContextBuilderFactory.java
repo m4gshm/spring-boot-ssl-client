@@ -1,4 +1,4 @@
-package org.springframework.boot.web.client;
+package io.netty.handler.ssl;
 
 import io.netty.handler.ssl.SslContextBuilder;
 import lombok.RequiredArgsConstructor;

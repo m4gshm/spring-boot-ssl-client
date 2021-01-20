@@ -1,8 +1,9 @@
-package org.springframework.boot.web.client;
+package org.springframework.web.client;
 
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.client.RestTemplate;
+import io.net.ssl.SslContextHolder;
+import org.springframework.http.client.SslVerificationHttpRequestFactory;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLContext;

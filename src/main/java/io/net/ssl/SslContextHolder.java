@@ -1,7 +1,7 @@
-package org.springframework.boot.web.client;
+package io.net.ssl;
 
 import lombok.RequiredArgsConstructor;
-import net.ssl.SslContextUtils;
+import io.net.ssl.SslContextUtils;
 
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;

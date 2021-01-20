@@ -1,6 +1,6 @@
-package reactivefeign.webclient.spring.config;
+package org.springframework.boot.autoconfigure;
 
-import org.springframework.boot.web.client.NettySslContextBuilderFactory;
+import io.netty.handler.ssl.NettySslContextBuilderFactory;
 import reactivefeign.webclient.SslSupportWebClientFeignCustomizer;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactivefeign.webclient.WebClientFeignCustomizer;
-import reactivefeign.webclient.spring.ReactiveFeignHttpClientProperties;
+import org.springframework.boot.ReactiveFeignHttpClientProperties;
 
 @Slf4j
 @Configuration

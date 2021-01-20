@@ -1,8 +1,8 @@
-package org.springframework.boot.web.client.config;
+package org.springframework.boot.autoconfigure;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.web.client.ClientSsl;
-import org.springframework.boot.web.client.ClientSslProperties;
+import io.net.ssl.client.ClientSsl;
+import io.net.ssl.client.ClientSslProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

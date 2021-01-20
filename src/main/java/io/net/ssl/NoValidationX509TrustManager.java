@@ -1,4 +1,4 @@
-package net.ssl;
+package io.net.ssl;
 
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;

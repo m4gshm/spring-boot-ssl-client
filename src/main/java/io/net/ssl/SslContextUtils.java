@@ -1,4 +1,4 @@
-package net.ssl;
+package io.net.ssl;
 
 import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;

@@ -1,4 +1,4 @@
-package net.ssl;
+package io.net.ssl;
 
 import javax.net.ssl.*;
 import java.security.KeyStore;
