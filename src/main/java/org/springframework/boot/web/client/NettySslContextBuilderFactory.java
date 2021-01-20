@@ -2,7 +2,6 @@ package org.springframework.boot.web.client;
 
 import io.netty.handler.ssl.SslContextBuilder;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.TrustManagerFactory;

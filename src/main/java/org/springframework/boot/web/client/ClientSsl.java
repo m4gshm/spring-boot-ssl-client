@@ -4,8 +4,10 @@ import lombok.Getter;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
+import net.ssl.AcceptAnyHostname;
 import net.ssl.NoValidationTrustManagerFactory;
 
+import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.TrustManagerFactory;
 import java.io.InputStream;
@@ -19,15 +21,19 @@ public class ClientSsl {
     final KeyManagerFactory keyManagerFactory;
     @Getter
     final TrustManagerFactory trustManagerFactory;
+    @Getter
+    final HostnameVerifier hostnameVerifier;
 
     public ClientSsl(ClientSslProperties properties) {
         keyManagerFactory = newKeyManagerFactory(properties.getKeyStore(), properties.getKeyStorePassword(),
                 properties.getKeyStoreType(), properties.getKeyStoreProvider());
 
         val insecure = properties.isDisableSslValidation();
+        if (insecure) log.trace("client ssl validation is disabled");
         trustManagerFactory = insecure ? NoValidationTrustManagerFactory.INSTANCE
                 : newTrustManagerFactory(properties.getTrustStore(), properties.getTrustStorePassword(),
                 properties.getKeyStoreType(), properties.getTrustStoreProvider());
+        hostnameVerifier = insecure ? new AcceptAnyHostname() : null;
     }
 
     @SneakyThrows
