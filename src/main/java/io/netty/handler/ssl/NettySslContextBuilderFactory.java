@@ -1,6 +1,5 @@
 package io.netty.handler.ssl;
 
-import io.netty.handler.ssl.SslContextBuilder;
 import lombok.RequiredArgsConstructor;
 
 import javax.net.ssl.KeyManagerFactory;

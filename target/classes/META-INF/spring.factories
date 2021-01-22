@@ -1,0 +1,5 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  org.springframework.boot.autoconfigure.ClientSslPropertiesConfig,\
+  org.springframework.boot.autoconfigure.ClientSslConfig,\
+  org.springframework.boot.autoconfigure.ClientSslServicesConfig,\
+  org.springframework.boot.autoconfigure.SslSupportWebClientFeignCustomizerConfig

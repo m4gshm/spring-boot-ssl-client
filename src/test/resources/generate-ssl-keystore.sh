@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+keytool -genkey -keyalg RSA -keystore keystore.p12 -alias test -storepass password -keysize 4096 -validity 999999 -storetype pkcs12 -dname "CN=test, OU=client-ssl, O=springframework, C=RU" -ext san=dns:localhost,ip:127.0.0.1,ip:0.0.0.0

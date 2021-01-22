@@ -1,7 +1,9 @@
 package org.springframework.boot.autoconfigure;
 
+import io.netty.handler.ssl.SslContextBuilder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import io.net.ssl.client.ClientSsl;
 import io.netty.handler.ssl.NettySslContextBuilderFactory;
@@ -19,6 +21,7 @@ public class ClientSslServicesConfig {
 
     @Bean
     @ConditionalOnMissingBean
+    @ConditionalOnClass(SslContextBuilder.class)
     public NettySslContextBuilderFactory nettySslContextBuilderFactory() {
         return new NettySslContextBuilderFactory(clientSsl.getKeyManagerFactory(), clientSsl.getTrustManagerFactory());
     }
