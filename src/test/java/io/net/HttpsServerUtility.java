@@ -1,4 +1,4 @@
-package org.springframework.web.client;
+package io.net;
 
 import com.sun.net.httpserver.HttpsConfigurator;
 import com.sun.net.httpserver.HttpsServer;
@@ -23,7 +23,6 @@ public class HttpsServerUtility {
 
     @SneakyThrows
     public static HttpsServer newHttpsServer() {
-
         val httpServer = create(new InetSocketAddress("localhost", 0), 0);
         httpServer.setHttpsConfigurator(new HttpsConfigurator(newSslContext()));
 

@@ -31,8 +31,10 @@ if (!asSubproject) configure<io.spring.gradle.dependencymanagement.internal.dsl.
         dependency("com.playtika.reactivefeign:feign-reactor-webclient:[2,)")
         dependency("org.springframework.boot:spring-boot-test:[2,)")
         dependency("org.springframework:spring-web:[5,)")
+        dependency("org.springframework:spring-webflux:[5,)")
         dependency("org.springframework:spring-test:[5,)")
         dependency("junit:junit:[4,)")
+        dependency("io.projectreactor.netty:reactor-netty:[0.9,)")
     }
 }
 
@@ -56,6 +58,8 @@ dependencies {
 
     testImplementation("org.springframework:spring-web")
     testImplementation("org.springframework:spring-test")
+    testImplementation("org.springframework:spring-webflux")
+    testImplementation("io.projectreactor.netty:reactor-netty")
 
 }
 
@@ -69,6 +73,18 @@ publishing {
             pom {
                 properties.put("maven.compiler.target", "${java.targetCompatibility}")
                 properties.put("maven.compiler.source", "${java.sourceCompatibility}")
+                developers {
+                    developer {
+                        id.set("buls")
+                        name.set("Bulgakov Alexander")
+                        email.set("buls@yandex.ru")
+                    }
+                }
+                scm {
+                    connection.set("scm:git:https://github.com/m4gshm/spring-boot-ssl-client.git")
+                    developerConnection.set("scm:git:https://github.com/m4gshm/spring-boot-ssl-client.git")
+                    url.set("https://github.com/m4gshm/spring-boot-ssl-client")
+                }
             }
 
             versionMapping {

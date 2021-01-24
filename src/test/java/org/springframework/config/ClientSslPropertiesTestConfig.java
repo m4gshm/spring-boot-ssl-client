@@ -1,4 +1,4 @@
-package org.springframework.web.client;
+package org.springframework.config;
 
 import io.net.ssl.client.ClientSslProperties;
 import lombok.val;
