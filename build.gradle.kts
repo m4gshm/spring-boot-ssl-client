@@ -7,7 +7,7 @@ buildscript {
     }
 }
 
-group = "m4gshm.springframework"
+group = "m4gshm.springframework.boot"
 version = "0.0.1.SNAPSHOT"
 
 repositories.addAll(rootProject.buildscript.repositories)
@@ -27,7 +27,8 @@ if (!asSubproject) configure<io.spring.gradle.dependencymanagement.internal.dsl.
         dependency("org.springframework.boot:spring-boot:[2,)")
         dependency("org.springframework.boot:spring-boot-configuration-processor:[2,)")
         dependency("org.springframework.boot:spring-boot-autoconfigure:[2,)")
-        dependency("io.netty:netty-all:[4,)")
+        dependency("io.netty:netty-all:[4,5)")
+        dependency("io.netty:netty-handler:[4,5)")
         dependency("com.playtika.reactivefeign:feign-reactor-webclient:[2,)")
         dependency("org.springframework.boot:spring-boot-test:[2,)")
         dependency("org.springframework:spring-web:[5,)")
@@ -44,11 +45,16 @@ dependencies {
         add(it, "org.projectlombok:lombok")
     }
 
-    api("org.slf4j:slf4j-api")
-    api("org.springframework.boot:spring-boot")
-    api("org.springframework.boot:spring-boot-autoconfigure")
-    compileOnly("io.netty:netty-all")
-    compileOnly("com.playtika.reactivefeign:feign-reactor-webclient")
+    compileOnly("org.slf4j:slf4j-api")
+    compileOnly("org.springframework:spring-web")
+    compileOnly("org.springframework:spring-webflux")
+    compileOnly("org.springframework.boot:spring-boot")
+    compileOnly("org.springframework.boot:spring-boot-autoconfigure")
+    compileOnly("io.netty:netty-handler")
+    compileOnly("com.playtika.reactivefeign:feign-reactor-webclient") {
+        isTransitive = false
+    }
+    compileOnly("io.projectreactor.netty:reactor-netty")
 
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     compileOnly("org.springframework.boot:spring-boot-configuration-processor")
@@ -63,8 +69,30 @@ dependencies {
 
 }
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
+
+val jvmVersion = org.gradle.internal.jvm.Jvm.current().javaVersion
+
+project.logger.warn("current jvm version $jvmVersion")
+if (jvmVersion != null && jvmVersion.isJava9Compatible) {
+    java {
+        sourceCompatibility = JavaVersion.VERSION_1_9
+        modularity.inferModulePath.set(true)
+    }
+    sourceSets["main"].java.srcDirs("src/main/module")
+
+    apply {
+        from("./module.gradle.kts")
+    }
+
+} else {
+    java {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+    }
+    tasks.withType<org.gradle.jvm.tasks.Jar> {
+        manifest {
+            attributes["Automatic-Module-Name"] = "spring.boot.ssl.client"
+        }
+    }
 }
 
 publishing {
@@ -90,7 +118,14 @@ publishing {
             versionMapping {
                 usage("java-api") {
                     fromResolutionResult()
+//                    fromResolutionOf("runtimeClasspath")
                 }
+//                usage("java-compile") {
+//                    fromResolutionResult()
+//                }
+//                usage("java-runtime") {
+//                    fromResolutionResult()
+//                }
             }
             from(components["java"])
         }
