@@ -69,10 +69,8 @@ dependencies {
 
 }
 
-
 val jvmVersion = org.gradle.internal.jvm.Jvm.current().javaVersion
 
-project.logger.warn("current jvm version $jvmVersion")
 if (jvmVersion != null && jvmVersion.isJava9Compatible) {
     java {
         sourceCompatibility = JavaVersion.VERSION_1_9
