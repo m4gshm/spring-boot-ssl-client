@@ -76,6 +76,11 @@ tasks.compileJava {
     }
 }
 
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
 if (JavaVersion.current().isJava9Compatible) {
     java {
         sourceCompatibility = JavaVersion.VERSION_1_9
@@ -100,12 +105,23 @@ if (JavaVersion.current().isJava9Compatible) {
 publishing {
     publications {
         create<MavenPublication>("mavenJava") {
+            val projectVersion = project.version.toString()
+            version = when {
+                projectVersion.endsWith(".SNAPSHOT") -> projectVersion.removeSuffix(".SNAPSHOT")
+                else -> projectVersion
+            }
+            repositories {
+                maven {
+                    name = "mavenTestLocal"
+                    url = uri(layout.buildDirectory.dir("repos/mavenTestLocal"))
+                }
+            }
             pom {
                 properties.put("maven.compiler.target", "${java.targetCompatibility}")
                 properties.put("maven.compiler.source", "${java.sourceCompatibility}")
                 developers {
                     developer {
-                        id.set("buls")
+                        id.set("m4gshm")
                         name.set("Bulgakov Alexander")
                         email.set("buls@yandex.ru")
                     }
@@ -115,19 +131,6 @@ publishing {
                     developerConnection.set("scm:git:https://github.com/m4gshm/spring-boot-ssl-client.git")
                     url.set("https://github.com/m4gshm/spring-boot-ssl-client")
                 }
-            }
-
-            versionMapping {
-                usage("java-api") {
-                    fromResolutionResult()
-//                    fromResolutionOf("runtimeClasspath")
-                }
-//                usage("java-compile") {
-//                    fromResolutionResult()
-//                }
-//                usage("java-runtime") {
-//                    fromResolutionResult()
-//                }
             }
             from(components["java"])
         }

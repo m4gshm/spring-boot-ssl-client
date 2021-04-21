@@ -1,12 +1,24 @@
 repositories.addAll(rootProject.buildscript.repositories)
 
+val libraryDepenedencySrc: String? = rootProject.properties["libraryDepenedencySrc"] as String?
+val libraryVersion: String? = rootProject.properties["libraryVersion"] as String?
+
+repositories {
+    if (libraryDepenedencySrc == "maven-test") {
+        maven("http://m4gshm.github.io/maven2/")
+    }
+}
+
 plugins {
     java
 }
 
 dependencies {
-    testImplementation(project(":spring-boot-ssl-client"))
-//    testImplementation("m4gshm.springframework.boot:spring-boot-ssl-client:0.0.1.SNAPSHOT")
+
+    testImplementation(when (libraryDepenedencySrc) {
+        in listOf("maven", "maven-test") -> "m4gshm.springframework.boot:spring-boot-ssl-client:${libraryVersion ?: "0.0.1"}"
+        else -> project(":spring-boot-ssl-client")
+    })
 
     listOf("annotationProcessor", "testAnnotationProcessor", "compileOnly", "testCompileOnly").forEach {
         add(it, "org.projectlombok:lombok:1.18.16")
