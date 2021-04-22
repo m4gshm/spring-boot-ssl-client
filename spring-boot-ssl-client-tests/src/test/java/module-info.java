@@ -8,4 +8,6 @@ open module spring.boot.ssl.client.tests {
     requires jdk.httpserver;
     requires junit;
     requires reactor.netty.http;
+    requires reactor.netty.core;
+    requires org.reactivestreams;
 }

@@ -8,18 +8,16 @@ import org.junit.BeforeClass;
 import static m4gshm.springframework.ssl.client.test.HttpsServerUtility.newHttpsServer;
 
 public class BaseHttpsTest {
+    public static final String HOSTNAME = "localhost";
     public static volatile HttpsServer httpsServer;
 
     public static String getServerUrl() {
-        val address = httpsServer.getAddress();
-        val hostName = address.getHostName();
-        val port = address.getPort();
-        return "https://" + hostName + ":" + port;
+        return "https://" + HOSTNAME + ":" + httpsServer.getAddress().getPort();
     }
 
     @BeforeClass
     public static void startHttpsServer() {
-        httpsServer = newHttpsServer();
+        httpsServer = newHttpsServer(HOSTNAME);
     }
 
     @AfterClass

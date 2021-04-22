@@ -22,8 +22,8 @@ public class HttpsServerUtility {
     public static final String ROOT_RESPONSE = "ok";
 
     @SneakyThrows
-    public static HttpsServer newHttpsServer() {
-        val httpServer = create(new InetSocketAddress("localhost", 0), 0);
+    public static HttpsServer newHttpsServer(String hostname) {
+        val httpServer = create(new InetSocketAddress(hostname, 0), 0);
         httpServer.setHttpsConfigurator(new HttpsConfigurator(newSslContext()));
 
         httpServer.createContext("/").setHandler(exchange -> {
