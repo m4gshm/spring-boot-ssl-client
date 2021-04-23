@@ -107,7 +107,6 @@ if (!buildForJava8) {
 publishing {
     publications {
         create<MavenPublication>("java") {
-            val projectVersion = project.version.toString()
             repositories {
                 val mavenTempLocalRepoUrl: String? by rootProject
                 if (mavenTempLocalRepoUrl != null) maven {
@@ -118,7 +117,7 @@ publishing {
                 val mavenRepoSnapshotUrl: String? by rootProject
                 val mavenRepoReleaseUrl: String? by rootProject
                 when {
-                    projectVersion.endsWith("-SNAPSHOT") -> mavenRepoSnapshotUrl
+                    version.endsWith("-SNAPSHOT") -> mavenRepoSnapshotUrl
                     else -> mavenRepoReleaseUrl
                 }?.let { repoUrl ->
                     maven {
