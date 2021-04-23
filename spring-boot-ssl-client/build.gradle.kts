@@ -81,8 +81,10 @@ java {
     withSourcesJar()
 }
 
-if (JavaVersion.current().isJava9Compatible) {
+val buildForJava8: Boolean by rootProject.extra
+if (!buildForJava8) {
     java {
+        targetCompatibility = JavaVersion.VERSION_1_9
         sourceCompatibility = JavaVersion.VERSION_1_9
         modularity.inferModulePath.set(true)
     }
@@ -93,6 +95,7 @@ if (JavaVersion.current().isJava9Compatible) {
     }
 } else {
     java {
+        targetCompatibility = JavaVersion.VERSION_1_8
         sourceCompatibility = JavaVersion.VERSION_1_8
     }
     tasks.jar {

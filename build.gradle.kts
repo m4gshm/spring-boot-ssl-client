@@ -6,8 +6,4 @@ buildscript {
 }
 
 
-//val libraryDepenedencySrc: String by project {
-//    val prop = project.properties["libraryDepenedencySrc"]
-//    if(prop != null) "$prop"
-//    else ""
-//}
+val buildForJava8 by extra { true }

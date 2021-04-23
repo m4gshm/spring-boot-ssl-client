@@ -35,9 +35,19 @@ dependencies {
 
 }
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_1_9
-    modularity.inferModulePath.set(true)
+val buildForJava8: Boolean by rootProject.extra
+if (!buildForJava8) {
+    java {
+        targetCompatibility = JavaVersion.VERSION_1_9
+        sourceCompatibility = JavaVersion.VERSION_1_9
+        modularity.inferModulePath.set(true)
+    }
+    sourceSets["test"].java.srcDirs("src/test/module")
+} else {
+    java {
+        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_1_8
+    }
 }
 
 val copyToModelClasses = tasks.create<Copy>("copyToModelClasses") {

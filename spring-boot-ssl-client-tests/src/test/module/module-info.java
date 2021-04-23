@@ -6,6 +6,7 @@ open module spring.boot.ssl.client.tests {
     requires spring.boot.autoconfigure;
     requires spring.beans;
     requires jdk.httpserver;
+    requires jdk.unsupported;
     requires junit;
     requires reactor.netty.http;
     requires reactor.netty.core;
