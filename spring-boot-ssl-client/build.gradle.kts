@@ -7,7 +7,7 @@ buildscript {
 }
 
 group = "m4gshm.springframework.boot"
-version = "0.0.1.SNAPSHOT"
+version = "0.0.1-SNAPSHOT"
 
 repositories.addAll(rootProject.buildscript.repositories)
 
@@ -77,7 +77,6 @@ tasks.compileJava {
 }
 
 java {
-    withJavadocJar()
     withSourcesJar()
 }
 
@@ -107,18 +106,34 @@ if (!buildForJava8) {
 
 publishing {
     publications {
-        create<MavenPublication>("mavenJava") {
+        create<MavenPublication>("java") {
             val projectVersion = project.version.toString()
-            version = when {
-                projectVersion.endsWith(".SNAPSHOT") -> projectVersion.removeSuffix(".SNAPSHOT")
-                else -> projectVersion
-            }
             repositories {
-                maven {
-                    name = "mavenTestLocal"
-                    url = uri(layout.buildDirectory.dir("repos/mavenTestLocal"))
+                val mavenTempLocalRepoUrl: String? by rootProject
+                if (mavenTempLocalRepoUrl != null) maven {
+                    name = "mavenTempLocal"
+                    url = uri(mavenTempLocalRepoUrl!!)
+                }
+
+                val mavenRepoSnapshotUrl: String? by rootProject
+                val mavenRepoReleaseUrl: String? by rootProject
+                when {
+                    projectVersion.endsWith("-SNAPSHOT") -> mavenRepoSnapshotUrl
+                    else -> mavenRepoReleaseUrl
+                }?.let { repoUrl ->
+                    maven {
+                        name = "mavenCustom"
+                        url = uri(repoUrl)
+                        credentials {
+                            val mavenRepoUser: String? by rootProject
+                            val mavenRepoPassword: String? by rootProject
+                            username = mavenRepoUser
+                            password = mavenRepoPassword
+                        }
+                    }
                 }
             }
+
             pom {
                 properties.put("maven.compiler.target", "${java.targetCompatibility}")
                 properties.put("maven.compiler.source", "${java.sourceCompatibility}")

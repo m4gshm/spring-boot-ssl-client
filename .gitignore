@@ -3,3 +3,4 @@
 build/
 spring-boot-ssl-client/build/
 spring-boot-ssl-client-tests/build/
+gradle.properties
