@@ -1,4 +1,4 @@
-repositories.addAll(rootProject.buildscript.repositories)
+repositories.addAll(rootProject.repositories)
 
 val libraryDepenedencySrc: String? = rootProject.properties["libraryDepenedencySrc"] as String?
 val libraryVersion: String? = rootProject.properties["libraryVersion"] as String?

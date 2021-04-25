@@ -1,25 +1,15 @@
-buildscript {
-    repositories.addAll(rootProject.buildscript.repositories)
-    val dependencyManagementPluginVer: String by rootProject.extra { "1.0.11.RELEASE" }
-    dependencies {
-        classpath("io.spring.gradle:dependency-management-plugin:$dependencyManagementPluginVer")
-    }
-}
-
 group = "m4gshm.springframework.boot"
 version = "0.0.1-SNAPSHOT"
 
-repositories.addAll(rootProject.buildscript.repositories)
+repositories.addAll(rootProject.repositories)
 
 plugins {
     `java-library`
     `maven-publish`
+    id("io.spring.dependency-management") version "1.0.11.RELEASE"
 }
 
-val asSubproject = pluginManager.hasPlugin("io.spring.dependency-management")
-if (!asSubproject) apply<io.spring.gradle.dependencymanagement.DependencyManagementPlugin>()
-
-if (!asSubproject) configure<io.spring.gradle.dependencymanagement.internal.dsl.StandardDependencyManagementExtension> {
+dependencyManagement {
     dependencies {
         dependency("org.projectlombok:lombok:[1.18,)")
         dependency("org.slf4j:slf4j-api:[1.7,)")
