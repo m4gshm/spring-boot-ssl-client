@@ -139,6 +139,16 @@ publishing {
                     url.set("https://github.com/m4gshm/spring-boot-ssl-client")
                 }
             }
+
+//            versionMapping {
+//                usage("java-api") {
+//                    fromResolutionOf("runtimeClasspath")
+//                }
+//                usage("java-runtime") {
+//                    fromResolutionResult()
+//                }
+//            }
+
             from(components["java"])
         }
     }
