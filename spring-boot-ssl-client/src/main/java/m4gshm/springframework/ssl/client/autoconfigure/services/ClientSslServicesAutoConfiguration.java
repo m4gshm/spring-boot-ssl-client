@@ -2,7 +2,7 @@ package m4gshm.springframework.ssl.client.autoconfigure.services;
 
 import io.netty.handler.ssl.SslContextBuilder;
 import lombok.RequiredArgsConstructor;
-import m4gshm.springframework.ssl.client.autoconfigure.ClientSslConfig;
+import m4gshm.springframework.ssl.client.autoconfigure.ClientSslAutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -16,8 +16,8 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration(proxyBeanMethods = false)
 @RequiredArgsConstructor
-@AutoConfigureAfter(ClientSslConfig.class)
-public class ClientSslServicesConfig {
+@AutoConfigureAfter(ClientSslAutoConfiguration.class)
+public class ClientSslServicesAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean

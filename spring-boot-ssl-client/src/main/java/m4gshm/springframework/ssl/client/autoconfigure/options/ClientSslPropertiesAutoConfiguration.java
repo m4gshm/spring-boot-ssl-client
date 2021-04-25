@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties
-public class ClientSslPropertiesConfig {
+public class ClientSslPropertiesAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean

@@ -17,7 +17,7 @@ import reactivefeign.webclient.WebClientFeignCustomizer;
 @RequiredArgsConstructor
 @ConditionalOnClass({WebClient.Builder.class, WebClientFeignCustomizer.class})
 @EnableConfigurationProperties(m4gshm.springframework.ssl.client.reactivefeign.ReactiveFeignHttpClientProperties.class)
-public class SslSupportWebClientFeignCustomizerConfig {
+public class SslSupportWebClientFeignCustomizerAutoConfiguration {
 
     @Bean
     public WebClientFeignCustomizer sslSupportWebClientFeignCustomizer(

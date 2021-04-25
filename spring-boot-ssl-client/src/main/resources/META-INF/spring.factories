@@ -1,5 +1,5 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  m4gshm.springframework.ssl.client.autoconfigure.options.ClientSslPropertiesConfig,\
-  m4gshm.springframework.ssl.client.autoconfigure.ClientSslConfig,\
-  m4gshm.springframework.ssl.client.autoconfigure.services.ClientSslServicesConfig,\
-  m4gshm.springframework.ssl.client.reactivefeign.autoconfigure.SslSupportWebClientFeignCustomizerConfig
+  m4gshm.springframework.ssl.client.autoconfigure.options.ClientSslPropertiesAutoConfiguration,\
+  m4gshm.springframework.ssl.client.autoconfigure.ClientSslAutoConfiguration,\
+  m4gshm.springframework.ssl.client.autoconfigure.services.ClientSslServicesAutoConfiguration,\
+  m4gshm.springframework.ssl.client.reactivefeign.autoconfigure.SslSupportWebClientFeignCustomizerAutoConfiguration
