@@ -89,7 +89,7 @@ if (!buildForJava8) {
     }
     tasks.jar {
         manifest {
-            attributes["Automatic-Module-Name"] = "spring.boot.ssl.client"
+            attributes["Automatic-Module-Name"] = "m4gshm.spring.boot.ssl.client"
         }
     }
 }

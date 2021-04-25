@@ -1,4 +1,4 @@
-open module spring.boot.ssl.client {
+open module m4gshm.spring.boot.ssl.client {
     requires static lombok;
 
     requires org.slf4j;
