@@ -18,7 +18,7 @@ dependencyManagement {
         dependency("org.springframework.boot:spring-boot-autoconfigure:[2,)")
         dependency("io.netty:netty-all:[4,5)")
         dependency("io.netty:netty-handler:[4,5)")
-        dependency("com.playtika.reactivefeign:feign-reactor-webclient:[2,)")
+        dependency("com.playtika.reactivefeign:feign-reactor-webclient:[2,3)")
         dependency("org.springframework.boot:spring-boot-test:[2,)")
         dependency("org.springframework:spring-web:[5,)")
         dependency("org.springframework:spring-webflux:[5,)")
