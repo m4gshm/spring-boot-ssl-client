@@ -70,8 +70,8 @@ java {
     withSourcesJar()
 }
 
-val buildForJava8: Boolean by rootProject.extra
-if (!buildForJava8) {
+val buildForJava8: Boolean? by rootProject.extra
+if (!(buildForJava8 ?: false)) {
     java {
         targetCompatibility = JavaVersion.VERSION_1_9
         sourceCompatibility = JavaVersion.VERSION_1_9
